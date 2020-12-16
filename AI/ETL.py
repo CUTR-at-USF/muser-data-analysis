@@ -1,6 +1,3 @@
-import os
-os.chdir(r'C:\Users\sriva\Desktop\edu.usf.sas.pal.muser\SpotifyDataExtractor')
-
 class ETL:
     def __init__(self, conn):
         self.conn = conn
