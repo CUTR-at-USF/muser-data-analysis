@@ -1,12 +1,10 @@
 # muser-data-app
-
 This is a Python Flask web app that currently offers the below functionalities:
 * The app is now able to extract data from Spotify API, save a raw CSV file with the timestamp, and perform ETL operation to dump the extracted data in SQL Server table.
 * In addition to the data extraction functionality, we have incorporated functionality to build a doc2vec NLP model and train it on the data dumped in the SQL table.
 * There is one final functionality to expand the muser data, collected from FireBase, with metadata information collected from Spotify. The app first queries Spotify for an exact match with the muser record (artist, track, and album), and in case there is no exact match, the app utilizes the doc2vec model to predict the most similar match in the SQL table.
 
 ## Setup
-
 You'll need the following installed to build the project:
 * python>=3.6
 * pandas>=1.1.3
@@ -21,18 +19,18 @@ You'll need the following installed to build the project:
 ## Setup .env file
 You'll need a .env file to store all the required credentials
 
-## Setup Spotify Developer Account
+##Setup config.py file
+You'll need a config.py file to test the application in development, deploy it to production, and make sure to keep a secret key to validate the cookies and to handle sessions.
 
+## Setup Spotify Developer Account
 Create a Spotify Developer account and generate client id and client secret key.
 
 ## Setup a SQL Database
-
 Create a database and run the db_schema.sql file.
 Generate a connection string and create a sqlalchemy engine.
 
 ## Run
-
-To run the application run the run.py file thorugh command line or an IDE.
+To run the application run the run.py file through command line or an IDE.
 
 ## License
 
