@@ -30,7 +30,7 @@ class Config:
     # Only required when using the session object
     # Generated with secrets.token_urlsafe(16)
     # You could also use os.urandom(16)
-    SECRET_KEY = "muser_data_app"
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
 class ProductionConfig(Config):
     """
