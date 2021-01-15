@@ -18,6 +18,8 @@
 
 # Import the dependencies
 import pandas as pd
+import time
+import numpy as np
 from AI.models import NLPModel
 
 
@@ -43,12 +45,21 @@ class MuserDataBuilder:
         self.df['tempo'] = '' * self.df.shape[0]
         self.df['valence'] = '' * self.df.shape[0]
         self.df['popularity'] = '' * self.df.shape[0]
+
+        sleep_min = 2
+        sleep_max = 5
+        request_count = 0
+
         for idx in self.df.index:
             album = self.df.loc[idx, 'song_album_name']
             track = self.df.loc[idx, 'song_name']
             artist = self.df.loc[idx, 'song_artist_name']
             query = 'album:{} track:{} artist:{}'.format(album, track, artist)
             spotify_search = self.sp.search(query, limit=1, offset=0, type='track', market=None)
+
+            request_count += 1
+            if request_count % 5 == 0:
+                time.sleep(np.random.uniform(sleep_min, sleep_max))
 
             if len(spotify_search['tracks']['items']) > 0:
                 track_uri = spotify_search['tracks']['items'][0]['uri']
