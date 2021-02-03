@@ -19,7 +19,7 @@ You'll need the following installed to build the project:
 ## Setup .env file
 You'll need a .env file to store all the required credentials
 
-##Setup config.py file
+## Setup config.py file
 You'll need a config.py file to test the application in development, deploy it to production, and make sure to keep a secret key to validate the cookies and to handle sessions.
 
 ## Setup Spotify Developer Account
