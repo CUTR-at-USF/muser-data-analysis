@@ -1,147 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-<title>Muser Data Analysis</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Muser Data App</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-body {font-family: "Lato", sans-serif}
-.mySlides {display: none}
+#hideDiv{background:red; width:400px; margin:0 auto; color:#fff; padding:10px; text-align:center;}
 </style>
-<body>
+<script type="text/javascript">
+function setTimeout(url) {
+	var tokenValue = document.getElementsByName("_vTransactToken")[0].value;
+	var data = "_vTransactToken," + tokenValue+",type,"+'biller';
+	postData(url, data);
+}
 
 
+$(function() {
+setTimeout(function() { $("#hideDiv").fadeOut(1500); }, 5000)
 
-<!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-black w3-card">
-    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-    <a href="#band" class="w3-bar-item w3-button w3-padding-large w3-hide-small"> Data  Analysis </a>
-    </div>
-  </div>
-</div>
-<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
-<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-  <a href="#band" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Data  Analysis</a>
-</div>
+})
+</script>
+	</head>
+	<body class="homepage is-preload">
+		<div id="page-wrapper">
 
-<!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:46px">
-  <!-- Automatic Slideshow Images -->
-  <div class="mySlides w3-display-container w3-center">
-    <img src="/app/static/image/10.jpg" style="width:100%">
-    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-    </div>
-  </div>
-  <div class="mySlides w3-display-container w3-center">
-    <img src="/app/static/image/8.jpg" style="width:100%">
-    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-    </div>
-  </div>
+			<!-- Header -->
+				<section id="header" class="wrapper">
 
-  <div class="mySlides w3-display-container w3-center">
-    <!--img src="/static/image/9.jpg" style="width:100%"-->
-    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-    </div>
-  </div>
+					<!-- Logo -->
+						<div id="logo">
+							<h1><a href="index.html">Muser Data Analysis</a></h1>
+							<p>Software to analyze data from the MUSER Music therapy app</p>
+						</div>
 
-  <!-- The Band Section -->
-  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
-    <h2 class="w3-wide">Muser Data App</h2>
-    <p class="w3-opacity"><i>We love music</i></p>
-    <p class="w3-justify">MUSER Data App is a solution to your music data analysis. The app offers functionalities to extract data from Spotify API, save a raw CSV file with the timestamp, and perform ETL operation to dump the extracted data in SQL Server. In addition to the data extraction functionality, we have incorporated functionality to build a doc2vec NLP model and train it on the data dumped in the SQL table. There is one final functionality to expand the muser data, collected from FireBase, with metadata information collected from Spotify. The app first queries Spotify for an exact match with the muser record (artist, track, and album), and in case there is no exact match, the app utilizes the doc2vec model to predict the most similar match in the SQL table.</p>
-      <span class="w3-large w3-text-black w3-margin-right"><mark><strong>{{msg}}</strong></mark> </span>
-    <div class="w3-row-padding w3-padding-32" style="margin:0 -16px">
-        <div class="w3-third w3-margin-bottom">
-          <img src="/static/image/1.jpg" alt="New York" style="width:95%" class="w3-hover-opacity">
-          <div class="w3-container w3-white">
-            <p><b>Data extraction</b></p>
-            <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('popModal').style.display='block'">Extract</button>
-          </div>
-        </div>
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li class="current"><a href="index.html">Home</a></li>
+							</ul>
+						</nav>
+				</section>
+			<!-- Intro -->
+				<section id="intro" class="wrapper style1">
+					<div class="container">
+					<div class="title">Data Engineering</div>
+								<div class="row aln-center">	
+								<span class="w3-large w3-text-black w3-margin-right" id="hideDiv"><mark><strong>{{msg}}</strong></mark> </span>
+								<div>						
+						<div class="row aln-center">
+							<div class="col-3 col-12-medium">
+								<section class="highlight">
+									<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+									<h3><a href="#">Data extraction</a></h3>
+									<p>Data extraction is the process of obtaining data from a Spotify API so that it can support online analytical processing.</p>
+									<ul class="actions" style="padding-top: 42px">
+										<li><a class="button style3" onclick="document.getElementById('popModal1').style.display='block'">Extract</a></li>
+									</ul>
+								</section>
+							</div>
+							<div class="col-3 col-12-medium">
+							<form action="/build_model"  method="post" >
+								<section class="highlight">
+									<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+									<h3><a href="#">Model building</a></h3>
+									<p>The app also  incorporated functionality to build a doc2vec NLP model and train it on the data dumped in the SQL table.</p>
+									<ul class="actions" style="padding-top: 57px">
+										<li><a type="submit" class="button style3" >Model</a></li>									</ul>
+								</section>
+							</div>
+							
+							<div class="col-3 col-12-medium">
+							 <form action="/build_muser_data"  method="post" >
+								<section class="highlight">
+									<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+									<h3><a href="#">Build Muser Data</a></h3>
+									<p>To expand the muser data, collected from FireBase,app utilizes the doc2vec model to predict the most similar match in the SQL table</p>
+									<ul class="actions" style="padding-top: 38px">
+										<li><a type="submit" class="button style3">Build</a></li>
+									</ul>
+								</section>
+								</form>
+							</div>
+							<div class="col-3 col-12-medium">
+								<section class="highlight">
+									<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+									<h3><a href="#">Muser Data Report</a></h3>
+									<p>To explore the data registered by the users, stored in the FireBase, and find trends in the events registered and user response</p>
+									<ul class="actions" style="padding-top: 18px">
+									<li><a class="button style3" onclick="document.getElementById('popModal2').style.display='block'">Generate</a></li>
+									</ul>
+								</section>
+							</div>
+						</div>
+				</section>
 
-
-        <div class="w3-third w3-margin-bottom">
-            <form action="/build_model"  method="post" >
-          <img src="/static/image/2.jpg" alt="Paris" style="width:89%" class="w3-hover-opacity">
-          <div class="w3-container w3-white" id="2"  name="retrain">
-            <p><b>Model building</b></p>
-            <button class="w3-button w3-black w3-margin-bottom" type="submit"> Model</button>
-          </div>
-            </form>
-        </div>
-
-
-        <div class="w3-third w3-margin-bottom">
-           <form action="/build_muser_data"  method="post" >
-          <img src="/static/image/3.jpg" alt="New York" style="width:89%" class="w3-hover-opacity">
-          <div class="w3-container w3-white" id="3"  name="build">
-            <p><b>Build Muser Data</b></p>
-            <button class="w3-button w3-black w3-margin-bottom" type="submit"> Build</button>
-          </div>
-            </form>
-        </div>
-      </div>
-  </div>
-</div>
-
-  <!-- Pop up Modal -->
-  <div id="popModal" class="w3-modal">
+  <div id="popModal1" class="w3-modal">
        <form action="/extract"  method="post" >
     <div class="w3-modal-content w3-animate-top w3-card-4">
-      <header class="w3-container w3-teal w3-center w3-padding-32">
-        <span onclick="document.getElementById('popModal').style.display='none'"
-       class="w3-button w3-teal w3-xlarge w3-display-topright">×</span>
+      <header class="w3-container w3-pale-red w3-center w3-padding-32">
         <h2 class="w3-wide"></i>Extract</h2>
       </header>
       <div class="w3-container">
         <p><label></i> Enter Keyword</label></p>
         <input class="w3-input w3-border" type="text" placeholder="Please Keyword" id="1"  name="genre">
-        <button class="w3-button w3-block w3-teal w3-padding-16 w3-section w3-right">Extract <i class="fa fa-check"></i></button>
-        <button class="w3-button w3-red w3-section" onclick="document.getElementById('popModal').style.display='none'">Close <i class="fa fa-remove"></i></button>
+        <button class="w3-button w3-block w3-dark-grey w3-padding-16 w3-section w3-right">Extract <i class="fa fa-check"></i></button>
+          <a class="w3-button w3-pale-red w3-section" href="index.html"">Close <i class="fa fa-remove"></i></a>
       </div>
     </div>
        </form>
   </div>
+  
+   <div id="popModal2" class="w3-modal">
+       <form action="/extract"  method="post" >
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+      <header class="w3-container w3-pale-red w3-center w3-padding-32">
+        <h2 class="w3-wide"></i>Upload</h2>
+      </header>
+      <div class="w3-container">
+        <p><label></i> Upload Muser Data</label></p>
+        <input class="w3-input w3-border" type="file" name="fileToUpload" id="fileToUpload">
+        <button class="w3-button w3-block w3-dark-grey w3-padding-16 w3-section w3-right" >Upload File <i class="fa fa-upload"></i></button>
+        <a class="w3-button w3-pale-red w3-section" href="index.html"">Close <i class="fa fa-remove"></i></a>
+      </div>
+    </div>
+       </form>
+  </div>
+			<!-- Footer -->
+				<section id="footer" class="wrapper">
+					
+						<div id="copyright">
+							<ul>
+								<li>&copy;  Copyright (C) 2019-2020 University of South Florida</li>
+							</ul>
+						</div>
+				
+				</section>
 
-<!-- End Page Content -->
-
-<!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
-  <p class="w3-medium">@ Copyright (C) 2019-2020 University of South Florida</p>
-</footer>
-
+		</div>
 <script>
-// Automatic Slideshow - change image every 4 seconds
-var myIndex = 0;
-carousel();
-
-function carousel() {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  myIndex++;
-  if (myIndex > x.length) {myIndex = 1}
-  x[myIndex-1].style.display = "block";
-  setTimeout(carousel, 4000);
-}
-
-// Used to toggle the menu on small screens when clicking on the menu button
-function myFunction() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else {
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-
-// When the user clicks anywhere outside of the modal, close it
 var modal = document.getElementById('popModal');
 window.onclick = function(event) {
   if (event.target == modal) {
@@ -149,5 +149,13 @@ window.onclick = function(event) {
   }
 }
 </script>
-</body>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>

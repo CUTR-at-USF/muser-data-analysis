@@ -40,6 +40,8 @@ class SpotifyDataExtractor:
 
         self.spotify_albums = {}
         self.album_count = 0
+        self.sleep_min = 2
+        self.sleep_max = 5
 
     # Function to extract all the related information for an album song
     def _extract_album_songs(self, uri):
@@ -90,20 +92,21 @@ class SpotifyDataExtractor:
             pop = self.sp.track(track)
             self.spotify_albums[album]['popularity'].append(pop['popularity'])
             track_count += 1
+            if track_count % 5 == 0:
+                print(str(track_count) + " tracks completed")
+                time.sleep(np.random.uniform(self.sleep_min, self.sleep_max))
 
     # Function to build a pandas dataframe with the different features extract using above methods
     # Save the pandas dataframe as a csv file
     # Dump the dataframe to sql worker table
     def build_database(self):
-        sleep_min = 2
-        sleep_max = 5
         start_time = time.time()
         request_count = 0
 
         for uri in self.album_uris:
             self._extract_album_songs(uri)
-            print("Album " + str(
-                self.album_names[self.album_count]) + " songs has been added to spotify_albums dictionary")
+            print("Album " + str(self.album_names[self.album_count]) + "songs has been added to spotify_albums "
+                                                                       "dictionary")
             self.album_count += 1
 
         for album in self.spotify_albums:
@@ -111,7 +114,7 @@ class SpotifyDataExtractor:
             request_count += 1
             if request_count % 5 == 0:
                 print(str(request_count) + " playlists completed")
-                time.sleep(np.random.uniform(sleep_min, sleep_max))
+                time.sleep(np.random.uniform(self.sleep_min, self.sleep_max))
                 print('Loop #: {}'.format(request_count))
                 print('Elapsed Time: {} seconds'.format(time.time() - start_time))
 

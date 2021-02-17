@@ -49,7 +49,7 @@ def extract():
         for i in range(len(genre_data['tracks']['items'])):
             for j in range(len(genre_data['tracks']['items'][i]['artists'])):
                 artist_list[genre_data['tracks']['items'][i]['artists'][j]['uri']] = \
-                genre_data['tracks']['items'][i]['artists'][j]['name']
+                    genre_data['tracks']['items'][i]['artists'][j]['name']
         print('{} uris found for the {} genre'.format(len(artist_list), genre))
         for uri, name in artist_list.items():
             extractor = SpotifyDataExtractor(sp, uri, name, engine)
