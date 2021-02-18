@@ -18,19 +18,31 @@
 
 # Import the dependencies
 from app import app
-from flask import request, render_template
+from flask import request, render_template, send_file
+
 from app.connectionmanager import ConnectionManager
 from AI.spotifydataextractor import SpotifyDataExtractor
 from AI.ETL import ETL
 from AI.models import NLPModel
 from AI.muserdatabuilder import MuserDataBuilder
+from io import BytesIO
+import pandas as pd
 
 # Creates an object of the ConnectionManager class
 # To create connections to spotify and sql server database
+from reports.report import MuserReport
+import os
+from os.path import join, dirname, realpath
+
 connection_manager = ConnectionManager()
 sp = connection_manager.spotify_connection()
 engine = connection_manager.database_connection()
+# Upload folder
+DOWNLOAD_FOLDER = 'reports/downloads/'
+app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 
+UPLOAD_FOLDER = 'reports/uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def hello_world():
@@ -84,3 +96,33 @@ def build_muser_data():
         return render_template('index.html', msg='Muser data built successfully')
     except Exception() as e:
         print(e)
+
+
+# Function to call the NLPModel class and build a doc2vec model trained on the harvested data stored in sql database
+@app.route('/generate_report', methods=['POST', 'GET'])
+def generate_report():
+    try:
+        input_query = request.files
+        uploaded_file = input_query['file']
+        output = BytesIO()
+        writer = pd.ExcelWriter(output, engine="xlsxwriter")
+        if uploaded_file.filename != '':
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], uploaded_file.filename)
+            # set the file path
+            uploaded_file.save(file_path)
+            MuserReport(file_path, writer)
+            writer.save()
+            print("Workbook saved")
+            output.seek(0)
+            print("Output mapped to the starting index")
+            # response = Response(self.output.getvalue(),
+            #                     mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            #                     headers={"Content-Disposition": "attachment;filename=Dss_project.txt"},
+            #                     content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            # print("response created")
+            print("Response received")
+        return send_file(output, attachment_filename="muser_report.xlsx", as_attachment=True)
+
+    except Exception() as e:
+        print(e)
+
