@@ -1,12 +1,16 @@
 import pandas as pd
 import plotly.express as px
+from io import BytesIO
 import datetime
-
+from flask import send_file, Response
+import os
+import requests
 
 class MuserReport:
-    def __init__(self, data):
+    def __init__(self, data, writer):
         self.df = pd.read_csv(data)
-        self.writer = pd.ExcelWriter("muser_data_reports.xlsx", engine="xlsxwriter")
+        self.writer = writer
+        self.generate_report()
 
 
     def _extract_date(self, time_stamp, is_milli=False):
@@ -41,7 +45,7 @@ class MuserReport:
         download_date_data.columns = ["download_date", "count"]
         download_date_data.sort_values("download_date", inplace=True, ignore_index=True)
         fig = px.line(download_date_data, x="download_date", y="count", title="Songs downloaded over time")
-        fig.write_image("download_dates.png", path="reports/downloads/")
+        fig.write_image("download_date_data.png")
         return download_date_data
 
 
@@ -56,7 +60,7 @@ class MuserReport:
         fig = px.pie(names=user_activity_dist["activity_level"].value_counts().index,
                      values=user_activity_dist["activity_level"].value_counts().values, width=800,
                      title="User activity distribution")
-        fig.write_image("user_activity.png", path="reports/downloads/")
+        fig.write_image("user_activity.png")
         return user_activity_dist
 
 
@@ -80,7 +84,7 @@ class MuserReport:
         unique_songs_stats.loc["Unique songs PLAYED without PAUSE or SKIP", "count"] = len(list_completed_songs)
         fig = px.pie(names=unique_songs_stats.index, values=unique_songs_stats["count"].values,
                      title="% completed play(without pausing or skipping)", width=800)
-        fig.write_image("unique_songs_stats.png", path="reports/downloads/")
+        fig.write_image("unique_songs_stats.png")
         return unique_songs_stats
 
 
@@ -89,7 +93,7 @@ class MuserReport:
         user_days_active["days_active(%)"] = user_days_active["activity_count"].apply(
             lambda x: x / user_days_active["activity_count"].sum())
         fig = px.bar(user_days_active, x="user_id", y="days_active(%)", title="% days active", height=800)
-        fig.write_image("user_days_active.png", path="reports/downloads/")
+        fig.write_image("user_activity_dist.png")
         return user_days_active
 
 
@@ -98,7 +102,7 @@ class MuserReport:
         activity_time_data.columns = ["activity_time", "count"]
         fig = px.histogram(df, x="activity_time", color="user_id",
                            title="Activity by Time of day among active users")
-        fig.write_image("activity_time_data.png", path="reports/downloads/")
+        fig.write_image("activity_time_data.png")
         return activity_time_data
 
 
@@ -108,33 +112,31 @@ class MuserReport:
 
         download_date_data = self.download_dates(muser_data)
         download_date_data.to_excel(self.writer, sheet_name="download_date_data", index=False)
-        workbook = self.writer.book
+        # workbook = self.writer.book
         worksheet = self.writer.sheets["download_date_data"]
         worksheet.insert_image("F1", "download_date_data.png")
 
         user_activity_dist = self.user_activity(muser_data)
         user_activity_dist.to_excel(self.writer, sheet_name="user_activity_dist", index=False)
-        workbook = self.writer.book
+        # workbook = self.writer.book
         worksheet = self.writer.sheets["user_activity_dist"]
         worksheet.insert_image("F1", "user_activity_dist.png")
 
         unique_songs_stats = self.unique_songs_stats(muser_data)
         unique_songs_stats.to_excel(self.writer, sheet_name="unique_songs_stats", index=True)
-        workbook = self.writer.book
+        # workbook = self.writer.book
         worksheet = self.writer.sheets["unique_songs_stats"]
         worksheet.insert_image("F1", "unique_songs_stats.png")
 
         user_days_active = self.days_active(user_activity_dist)
         user_days_active.to_excel(self.writer, sheet_name="user_days_active", index=False)
-        workbook = self.writer.book
+        # workbook = self.writer.book
         worksheet = self.writer.sheets["user_days_active"]
         worksheet.insert_image("F1", "user_days_active.png")
 
         activity_time_data = self.activity_time(muser_data)
         activity_time_data.to_excel(self.writer, sheet_name="activity_time_data", index=False)
-        workbook = self.writer.book
+        # workbook = self.writer.book
         worksheet = self.writer.sheets["activity_time_data"]
         worksheet.insert_image("F1", "activity_time_data.png")
-
-        # Close the Pandas Excel writer and output the Excel file.
-        self.writer.save()
+        print("Worksheets added to the excel workbook")

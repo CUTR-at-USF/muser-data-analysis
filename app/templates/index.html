@@ -4,25 +4,18 @@
 		<title>Muser Data App</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="/static/assets/css/main.css" />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-#hideDiv{background:red; width:400px; margin:0 auto; color:#fff; padding:10px; text-align:center;}
 </style>
 <script type="text/javascript">
-function setTimeout(url) {
-	var tokenValue = document.getElementsByName("_vTransactToken")[0].value;
-	var data = "_vTransactToken," + tokenValue+",type,"+'biller';
-	postData(url, data);
-}
 
 
-$(function() {
-setTimeout(function() { $("#hideDiv").fadeOut(1500); }, 5000)
 
-})
+
+
 </script>
 	</head>
 	<body class="homepage is-preload">
@@ -54,80 +47,111 @@ setTimeout(function() { $("#hideDiv").fadeOut(1500); }, 5000)
 						<div class="row aln-center">
 							<div class="col-3 col-12-medium">
 								<section class="highlight">
-									<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+									<a href="#" class="image featured"><img src="/static/images/pic02.jpg" alt="" /></a>
 									<h3><a href="#">Data extraction</a></h3>
 									<p>Data extraction is the process of obtaining data from a Spotify API so that it can support online analytical processing.</p>
-									<ul class="actions" style="padding-top: 42px">
+									<div class="col-3 col-12-medium">
+                                    <ul class="actions" style="padding-top: 42px">
 										<li><a class="button style3" onclick="document.getElementById('popModal1').style.display='block'">Extract</a></li>
 									</ul>
+                                    </div>
 								</section>
 							</div>
 							<div class="col-3 col-12-medium">
-							<form action="/build_model"  method="post" >
+
 								<section class="highlight">
-									<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+									<a href="#" class="image featured"><img src="/static/images/pic02.jpg" alt="" /></a>
 									<h3><a href="#">Model building</a></h3>
 									<p>The app also  incorporated functionality to build a doc2vec NLP model and train it on the data dumped in the SQL table.</p>
-									<ul class="actions" style="padding-top: 57px">
-										<li><a type="submit" class="button style3" >Model</a></li>									</ul>
+
+                                        <form action="/build_model"  method="post" >
+                                            <div class="col-3 col-12-medium"  id="2">
+                                    <ul class="actions" style="padding-top: 57px">
+                                                <button type="submit"class="button style3" >Model </button>
+
+																		</ul>
+ </div>
+                                     </form>
+
 								</section>
+
 							</div>
 							
 							<div class="col-3 col-12-medium">
 							 <form action="/build_muser_data"  method="post" >
 								<section class="highlight">
-									<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+									<a href="#" class="image featured"><img src="/static/images/pic04.jpg" alt="" /></a>
 									<h3><a href="#">Build Muser Data</a></h3>
 									<p>To expand the muser data, collected from FireBase,app utilizes the doc2vec model to predict the most similar match in the SQL table</p>
-									<ul class="actions" style="padding-top: 38px">
-										<li><a type="submit" class="button style3">Build</a></li>
+									<div class="col-3 col-12-medium">
+                                    <ul class="actions" style="padding-top: 38px">
+                                                                                        <button type="submit"class="button style3" >Build </button>
+
 									</ul>
+                                         </div>
 								</section>
 								</form>
 							</div>
 							<div class="col-3 col-12-medium">
 								<section class="highlight">
-									<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+									<a href="#" class="image featured"><img src="/static/images/pic04.jpg" alt="" /></a>
 									<h3><a href="#">Muser Data Report</a></h3>
 									<p>To explore the data registered by the users, stored in the FireBase, and find trends in the events registered and user response</p>
-									<ul class="actions" style="padding-top: 18px">
+									<div class="col-3 col-12-medium">
+                                    <ul class="actions" style="padding-top: 18px">
 									<li><a class="button style3" onclick="document.getElementById('popModal2').style.display='block'">Generate</a></li>
-									</ul>
+									</ul> </div>
 								</section>
 							</div>
 						</div>
+                                </div>
+                                </div>
+                        </div>
 				</section>
 
   <div id="popModal1" class="w3-modal">
-       <form action="/extract"  method="post" >
+
     <div class="w3-modal-content w3-animate-top w3-card-4">
       <header class="w3-container w3-pale-red w3-center w3-padding-32">
         <h2 class="w3-wide"></i>Extract</h2>
       </header>
       <div class="w3-container">
         <p><label></i> Enter Keyword</label></p>
+                     <form action="/extract"  method="post" >
+
         <input class="w3-input w3-border" type="text" placeholder="Please Keyword" id="1"  name="genre">
         <button class="w3-button w3-block w3-dark-grey w3-padding-16 w3-section w3-right">Extract <i class="fa fa-check"></i></button>
-          <a class="w3-button w3-pale-red w3-section" href="index.html"">Close <i class="fa fa-remove"></i></a>
+          </form>
+                            <button class="w3-buttonw3-pale-red w3- w3-section" onclick="document.getElementById('popModal1').style.display='none'">Close <i class="fa fa-remove"></i></button>
+
       </div>
     </div>
-       </form>
+
   </div>
   
    <div id="popModal2" class="w3-modal">
-       <form action="/extract"  method="post" >
     <div class="w3-modal-content w3-animate-top w3-card-4">
       <header class="w3-container w3-pale-red w3-center w3-padding-32">
         <h2 class="w3-wide"></i>Upload</h2>
       </header>
       <div class="w3-container">
         <p><label></i> Upload Muser Data</label></p>
-        <input class="w3-input w3-border" type="file" name="fileToUpload" id="fileToUpload">
+
+
+          <form method="post" action="/generate_report" enctype="multipart/form-data">
+                     <div>
+
+<input class="w3-input w3-border" type="file"  id="2" name="file">
         <button class="w3-button w3-block w3-dark-grey w3-padding-16 w3-section w3-right" >Upload File <i class="fa fa-upload"></i></button>
-        <a class="w3-button w3-pale-red w3-section" href="index.html"">Close <i class="fa fa-remove"></i></a>
-      </div>
+             </div>
+                 </form>
+
+
+                  <button class="w3-button w3-pale-red w3-section" onclick="document.getElementById('popModal2').style.display='none'">Close <i class="fa fa-remove"></i></button>
+</div>
+
     </div>
-       </form>
+
   </div>
 			<!-- Footer -->
 				<section id="footer" class="wrapper">
@@ -142,7 +166,13 @@ setTimeout(function() { $("#hideDiv").fadeOut(1500); }, 5000)
 
 		</div>
 <script>
-var modal = document.getElementById('popModal');
+var modal = document.getElementById('popModal1');
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+var modal = document.getElementById('popModal2');
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
@@ -150,12 +180,12 @@ window.onclick = function(event) {
 }
 </script>
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="/static/assets/js/jquery.min.js"></script>
+			<script src="/static/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/static/assets/js/browser.min.js"></script>
+			<script src="/static/assets/js/breakpoints.min.js"></script>
+			<script src="/static/assets/js/util.js"></script>
+			<script src="/static/assets/js/main.js"></script>
 
 	</body>
 </html>
