@@ -19,6 +19,7 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+
 class Config:
     """
     Use this class to share any default attributes with any subsequent
@@ -32,10 +33,11 @@ class Config:
     # You could also use os.urandom(16)
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
+
 class ProductionConfig(Config):
     """
     This class will inherit any attributes from the parent Config class.
-    Use this class to define production configuration atrributes, such
+    Use this class to define production configuration attributes, such
     as database usernames, passwords, server specific files & directories etc.
     """
     pass
@@ -44,7 +46,7 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     """
     This class will inherit any attributes from the parent Config class.
-    Use this class to define development configuration atrributes, such
+    Use this class to define development configuration attributes, such
     as local database usernames, passwords, local specific files & directories etc.
     """
     DEBUG = True
